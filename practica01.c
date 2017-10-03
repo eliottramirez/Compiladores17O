@@ -47,7 +47,14 @@ int main(){
 
 }
 
-//Inicializa la estrucutra Info de un nodo con los valores pasados en los parametros.
+/**
+	Inicializa 'Info' de un nodo.
+	
+	@param nodo Nodo al cual se le incializara Info
+	@param nombre[] Nombre de la variable
+	@param tipo[] Tipo de la variable
+	@param intvalor Valor
+*/ 
 void initInfo(Nodo * nodo, char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor){
     nodo->info = malloc(sizeof(Info));
     strcpy(nodo->info->nombre, nombre);
