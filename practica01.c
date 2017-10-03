@@ -4,7 +4,7 @@
 
 typedef struct Informacion {
     char nombre[40];
-    char tipo[5];
+    char tipo[10];
     int intvalor;
     float floatvalor;
     char charvalor;
@@ -18,17 +18,17 @@ typedef struct Nodos {
 /**
 	Inicializa 'Info' de un nodo.
 	
-	@param nodo Nodo al cual se le incializara Info
-	@param nombre[] Nombre de la variable
-	@param tipo[] Tipo de la variable
-	@param intvalor Valor si la variable es de tipo 'int'
-	@param floatvalor Valor si la variable es de tipo 'float'
-	@param charvalor Valor si la variable es de tipo 'char' 
+	@param nodo
+	@param nombre[]
+	@param tipo[]
+	@param intvalor
+	@param floatvalor
+	@param charvalor
 */ 
 void initInfo(Nodo * nodo, char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor);
 
 /**
-	Imprime una lista ligada.
+	Imprime en pantalla una lista ligada.
 	@param lista Lista ligada a imprimir (nodo cabeza).
 */
 void printLista(Nodo * lista);
@@ -63,7 +63,7 @@ int main(){
     insertNodo(&lista, newNodo);
     
     newNodo = malloc(sizeof(Nodo));
-    initInfo(newNodo, "z", "char", 0, 0, 'c');
+    initInfo(newNodo, "z", "char", 0, 0, '3');
     insertNodo(&lista, newNodo);
 
     printf("LISTA:\n");
@@ -72,7 +72,6 @@ int main(){
     deleteNodo(&lista, "z");
     printf("\nLISTA MODIFICADA:\n");
     printLista(lista);
-
 }
 
 
