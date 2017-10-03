@@ -49,9 +49,8 @@ void insertNodo(Nodo ** lista, Nodo * newNodo);
 	@param lista
 	@param nombre[]
 */
-void deleteNodo(Nodo ** lista, char nombre[]);
+int deleteNodo(Nodo ** lista, char nombre[]);
 
-void printMenu();
 
 Nodo * lista = NULL;
 
@@ -64,7 +63,13 @@ int main(){
     while (menu != 4){
         
         if (menu == 0){
-            printMenu();
+            printf("¿qué desea hacer?:\n\
+                   1. Dar de alta una variable.\n\
+                   2. Dar de baja una variable.\n\
+                   3. Imprimir la lista de variables.\n\
+                   4. Salir.\n\
+                   ");
+            
             scanf("%d", &menu);
         }
         else if (menu == 1){
@@ -78,41 +83,53 @@ int main(){
             printf("Proporcione tipo de la variable: \n");
             scanf("%s", tipo);
             
-            printf("Proporcione nombre de la variable: \n");
-            scanf("%s", nombre);
-            
-            printf("Proporcione valor de la variable: \n");
-            if (strcmp("int", tipo) == 0){
-                scanf("%d", &intvalor);
-                floatvalor = 0;
-                charvalor = '\0';
-            }
-            else if (strcmp("float", tipo) == 0){
-                intvalor = 0;
-                scanf("%f", &floatvalor);
-                charvalor = '\0';
-            }
-            else if (strcmp("char", tipo) == 0){
-                intvalor = 0;
-                floatvalor = 0;
-                scanf(" %c", &charvalor);
-                
+            if ((strcmp("int", tipo) != 0) && (strcmp("float", tipo) != 0) && (strcmp("char", tipo) != 0)){
+                printf("Tipo inválido.");
+                menu = 0;
             }
             else {
-                printf("Error en tipo.");
-                menu = 4;
+                printf("Proporcione nombre de la variable: \n");
+                scanf("%s", nombre);
+                
+                printf("Proporcione valor de la variable: \n");
+                if (strcmp("int", tipo) == 0){
+                    scanf("%d", &intvalor);
+                    floatvalor = 0;
+                    charvalor = '\0';
+                }
+                else if (strcmp("float", tipo) == 0){
+                    intvalor = 0;
+                    scanf("%f", &floatvalor);
+                    charvalor = '\0';
+                }
+                else if (strcmp("char", tipo) == 0){
+                    intvalor = 0;
+                    floatvalor = 0;
+                    scanf(" %c", &charvalor);
+                    
+                }
+                
+                insertNodo(&lista, initNodo(nombre, tipo, intvalor, floatvalor, charvalor));
+                menu = 0;
             }
             
-            insertNodo(&lista, initNodo(nombre, tipo, intvalor, floatvalor, charvalor));
-            menu = 0;
         }
         else if (menu == 2){
             char nombre[40];
+            int status = 0;
             
             printf("Proporcione el nombre de la variable a eliminar: \n");
             scanf("%s", nombre);
             
-            deleteNodo(&lista, "z");
+            status = deleteNodo(&lista, nombre);
+            
+            if (status == 1){
+                printf("Variable encontrada y eliminada.\n");
+            }
+            else if (status == -1){
+                printf("Variable no encontrada.\n");
+            }
+            
             menu = 0;
             
         }
@@ -122,30 +139,10 @@ int main(){
             menu = 0;
         }
         else {
-            printf("Error en menu.");
+            printf("Error en menu.\n");
             menu = 4;
         }
     }
-    
-    
-    /*insertNodo(&lista, initNodo("x", "int", 1, 0, '\0'));
-
-    insertNodo(&lista, initNodo("y", "float", 0, 2, '\0'));
-    
-    insertNodo(&lista, initNodo("z", "char", 0, 0, '3'));
-
-    deleteNodo(&lista, "z");
-    
-    printLista(lista);*/
-}
-
-void printMenu(){
-    printf("¿que desea hacer?:\n\
-           1. Dar de alta una variable.\n\
-           2. Dar de baja una variable.\n\
-           3. Imprimir la lista de variables.\n\
-           4. Salir.\n\
-           ");
 }
 
 Nodo * initNodo(char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor){
@@ -187,24 +184,31 @@ void insertNodo(Nodo ** lista, Nodo * newNodo){
     *lista = newNodo;
 }
 
-void deleteNodo(Nodo ** lista, char nombre[]){
+int deleteNodo(Nodo ** lista, char nombre[]){
     Nodo * currentNodo = *lista;
     
     if (strcmp(currentNodo->info->nombre, nombre) != 0){
         
-        while ((currentNodo->sig != NULL) && (strcmp(currentNodo->sig->info->nombre, nombre) != 0)){
+        while ((currentNodo->sig != NULL) && (strcmp(currentNodo->sig->info->nombre, nombre)) != 0){
             currentNodo = currentNodo->sig;
             currentNodo->sig = currentNodo->sig->sig;
         }
         
-        if(currentNodo->sig != NULL){
+        if (currentNodo->sig != NULL){
             currentNodo->sig = currentNodo->sig->sig;
             free(currentNodo->sig);
+            
+            return 1;
+        }
+        else {
+            return -1;
         }
         
     }
     else {
         *lista = currentNodo->sig;
         free(currentNodo);
+        
+        return 1;
     }
 }
