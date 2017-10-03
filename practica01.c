@@ -16,16 +16,16 @@ typedef struct Nodos {
 } Nodo;
 
 /**
-	Inicializa 'Info' de un nodo.
-	
-	@param nodo
-	@param nombre[]
-	@param tipo[]
-	@param intvalor
-	@param floatvalor
-	@param charvalor
-*/ 
-void initInfo(Nodo * nodo, char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor);
+    Inicializa un Nodo
+ 
+    @param nombre
+    @param tipo
+    @param intvalor
+    @param floatvalor
+    @param charvalor
+    @return Regresa un Nodo * inicializado
+*/
+Nodo * initNodo(char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor);
 
 /**
 	Imprime en pantalla una lista ligada.
@@ -54,16 +54,13 @@ int main(){
     lista = NULL;
     Nodo * newNodo;
     
-    newNodo= malloc(sizeof(Nodo));
-    initInfo(newNodo, "x", "int", 1, 0, '\0');
+    newNodo = initNodo("x", "int", 1, 0, '\0');
     insertNodo(&lista, newNodo);
 
-    newNodo = malloc(sizeof(Nodo));
-    initInfo(newNodo, "y", "float", 0, 2, '\0');
+    newNodo = initNodo("y", "float", 0, 2, '\0');
     insertNodo(&lista, newNodo);
     
-    newNodo = malloc(sizeof(Nodo));
-    initInfo(newNodo, "z", "char", 0, 0, '3');
+    newNodo = initNodo("z", "char", 0, 0, '3');
     insertNodo(&lista, newNodo);
 
     printf("LISTA:\n");
@@ -74,14 +71,17 @@ int main(){
     printLista(lista);
 }
 
-
-void initInfo(Nodo * nodo, char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor){
-    nodo->info = malloc(sizeof(Info));
-    strcpy(nodo->info->nombre, nombre);
-    strcpy(nodo->info->tipo, tipo);
-    nodo->info->intvalor = intvalor;
-    nodo->info->floatvalor = floatvalor;
-    nodo->info->charvalor = charvalor;
+Nodo * initNodo(char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor){
+    Nodo * newNodo = malloc(sizeof(Nodo));
+    
+    newNodo->info = malloc(sizeof(Info));
+    strcpy(newNodo->info->nombre, nombre);
+    strcpy(newNodo->info->tipo, tipo);
+    newNodo->info->intvalor = intvalor;
+    newNodo->info->floatvalor = floatvalor;
+    newNodo->info->charvalor = charvalor;
+    
+    return newNodo;
 }
 
 void printLista(Nodo * lista){
