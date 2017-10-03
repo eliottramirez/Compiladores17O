@@ -21,13 +21,33 @@ typedef struct Nodos {
 	@param nodo Nodo al cual se le incializara Info
 	@param nombre[] Nombre de la variable
 	@param tipo[] Tipo de la variable
-	@param intvalor Valor
+	@param intvalor Valor si la variable es de tipo 'int'
+	@param floatvalor Valor si la variable es de tipo 'float'
+	@param charvalor Valor si la variable es de tipo 'char' 
 */ 
 void initInfo(Nodo * nodo, char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor);
+
+/**
+	Imprime una lista ligada.
+	@param lista Lista ligada a imprimir (nodo cabeza).
+*/
 void printLista(Nodo * lista);
+
+/**
+	Inserta un nodo al principio de una lista ligada.
+	@param lista
+	@param newNodo
+*/
 void insertNodo(Nodo ** lista, Nodo * newNodo);
+
+/**
+	Elimina un nodo de una lista ligada encontrado por su nombre.
+	@param lista
+	@param nombre[]
+*/
 void deleteNodo(Nodo ** lista, char nombre[]);
-Nodo * lista;
+
+:wNodo * lista;
 
 int main(){
 
@@ -65,7 +85,6 @@ void initInfo(Nodo * nodo, char nombre[], char tipo[], int intvalor, float float
     nodo->info->charvalor = charvalor;
 }
 
-//Imprime info de cada uno de los elementos de la lista ligada.
 void printLista(Nodo * lista){
     Nodo * nodoActual = lista;
 
@@ -87,13 +106,11 @@ void printLista(Nodo * lista){
     }
 }
 
-//Inserta un nodo al principio de la lista ligada.
 void insertNodo(Nodo ** lista, Nodo * newNodo){
     newNodo->sig = *lista;
     *lista = newNodo;
 }
 
-//Elimina el primer nodo que coincida con el nombre.
 void deleteNodo(Nodo ** lista, char nombre[]){
     Nodo * nodoAnterior = *lista;
     Nodo * nodoActual = nodoAnterior->sig;
