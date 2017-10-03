@@ -16,14 +16,15 @@ typedef struct Nodos {
 } Nodo;
 
 /**
-    Inicializa un Nodo
+    Inicializa un Nodo.
  
     @param nombre
     @param tipo
     @param intvalor
     @param floatvalor
     @param charvalor
-    @return Regresa un Nodo * inicializado
+ 
+    @return Un 'Nodo *' inicializado
 */
 Nodo * initNodo(char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor);
 
@@ -52,22 +53,15 @@ Nodo * lista;
 int main(){
 
     lista = NULL;
-    Nodo * newNodo;
     
-    newNodo = initNodo("x", "int", 1, 0, '\0');
-    insertNodo(&lista, newNodo);
+    insertNodo(&lista, initNodo("x", "int", 1, 0, '\0'));
 
-    newNodo = initNodo("y", "float", 0, 2, '\0');
-    insertNodo(&lista, newNodo);
+    insertNodo(&lista, initNodo("y", "float", 0, 2, '\0'));
     
-    newNodo = initNodo("z", "char", 0, 0, '3');
-    insertNodo(&lista, newNodo);
-
-    printf("LISTA:\n");
-    printLista(lista);
+    insertNodo(&lista, initNodo("z", "char", 0, 0, '3'));
 
     deleteNodo(&lista, "z");
-    printf("\nLISTA MODIFICADA:\n");
+    
     printLista(lista);
 }
 
@@ -111,6 +105,26 @@ void insertNodo(Nodo ** lista, Nodo * newNodo){
 }
 
 void deleteNodo(Nodo ** lista, char nombre[]){
+    Nodo * currentNodo = *lista;
+    
+    if (strcmp(currentNodo->info->nombre, nombre) != 0){
+        
+        while (strcmp(currentNodo->sig->info->nombre, nombre) != 0){
+            currentNodo = currentNodo->sig;
+            currentNodo->sig = currentNodo->sig->sig;
+        }
+        
+        currentNodo->sig = currentNodo->sig->sig;
+        free(currentNodo->sig);
+    }
+    else {
+        *lista = currentNodo->sig;
+        free(currentNodo);
+    }
+}
+
+
+/*void deleteNodo(Nodo ** lista, char nombre[]){
     Nodo * nodoAnterior = *lista;
     Nodo * nodoActual = nodoAnterior->sig;
 
@@ -128,4 +142,4 @@ void deleteNodo(Nodo ** lista, char nombre[]){
         *lista = nodoActual;
         free(nodoAnterior);
     }
-}
+}*/
