@@ -47,7 +47,7 @@ void insertNodo(Nodo ** lista, Nodo * newNodo);
 */
 void deleteNodo(Nodo ** lista, char nombre[]);
 
-:wNodo * lista;
+Nodo * lista;
 
 int main(){
 
