@@ -19,8 +19,6 @@ void initInfo(Nodo * nodo, char nombre[], char tipo[], int intvalor, float float
 void printLista(Nodo * lista);
 void insertNodo(Nodo ** lista, Nodo * newNodo);
 void deleteNodo(Nodo ** lista, char nombre[]);
-void helloWorld();
-
 Nodo * lista;
 
 int main(){
@@ -47,7 +45,6 @@ int main(){
     printf("\nLISTA MODIFICADA:\n");
     printLista(lista);
 
-    helloWorld();
 }
 
 //Inicializa la estrucutra Info de un nodo con los valores pasados en los parametros.
@@ -82,10 +79,6 @@ void printLista(Nodo * lista){
     }
 }
 
-//Esto es un comentario
-void helloWorld(){
-	printf("Hello World");
-}
 //Inserta un nodo al principio de la lista ligada.
 void insertNodo(Nodo ** lista, Nodo * newNodo){
     newNodo->sig = *lista;
