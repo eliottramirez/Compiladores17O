@@ -58,12 +58,12 @@ int main(){
 
     int menu = 0;
     
-    printf("Bienvenido, ");
+    printf("Bienvenido. ");
     
     while (menu != 4){
         
         if (menu == 0){
-            printf("¿qué desea hacer?:\n\
+            printf("¿Qué desea hacer?:\n\
                    1. Dar de alta una variable.\n\
                    2. Dar de baja una variable.\n\
                    3. Imprimir la lista de variables.\n\
@@ -112,7 +112,6 @@ int main(){
                 insertNodo(&lista, initNodo(nombre, tipo, intvalor, floatvalor, charvalor));
                 menu = 0;
             }
-            
         }
         else if (menu == 2){
             char nombre[40];
@@ -139,7 +138,7 @@ int main(){
             menu = 0;
         }
         else {
-            printf("Error en menu.\n");
+            printf("Error en menú.\n");
             menu = 4;
         }
     }
