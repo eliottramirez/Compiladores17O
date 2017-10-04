@@ -17,16 +17,16 @@ typedef struct Nodos {
 
 /**
     Inicializa un Nodo.
- 
-    @param nombre
+    
     @param tipo
+    @param nombre
     @param intvalor
     @param floatvalor
     @param charvalor
  
     @return Un 'Nodo *' inicializado
 */
-Nodo * initNodo(char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor);
+Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor);
 
 /**
 	Imprime en pantalla una lista ligada.
@@ -74,8 +74,8 @@ int main(){
         }
         else if (menu == 1){
             
-            char nombre[40];
             char tipo[10];
+            char nombre[40];
             int intvalor;
             float floatvalor;
             char charvalor;
@@ -84,7 +84,7 @@ int main(){
             scanf("%s", tipo);
             
             if ((strcmp("int", tipo) != 0) && (strcmp("float", tipo) != 0) && (strcmp("char", tipo) != 0)){
-                printf("Tipo inválido.");
+                printf("Tipo inválido.\n");
                 menu = 0;
             }
             else {
@@ -109,7 +109,7 @@ int main(){
                     
                 }
                 
-                insertNodo(&lista, initNodo(nombre, tipo, intvalor, floatvalor, charvalor));
+                insertNodo(&lista, initNodo(tipo, nombre, intvalor, floatvalor, charvalor));
                 menu = 0;
             }
         }
@@ -130,26 +130,24 @@ int main(){
             }
             
             menu = 0;
-            
         }
         else if (menu == 3){
-            
             printLista(lista);
             menu = 0;
         }
         else {
-            printf("Error en menú.\n");
-            menu = 4;
+            printf("Opción inválida.\n");
+            menu = 0;
         }
     }
 }
 
-Nodo * initNodo(char nombre[], char tipo[], int intvalor, float floatvalor, char charvalor){
+Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor){
     Nodo * newNodo = malloc(sizeof(Nodo));
     
     newNodo->info = malloc(sizeof(Info));
-    strcpy(newNodo->info->nombre, nombre);
     strcpy(newNodo->info->tipo, tipo);
+    strcpy(newNodo->info->nombre, nombre);
     newNodo->info->intvalor = intvalor;
     newNodo->info->floatvalor = floatvalor;
     newNodo->info->charvalor = charvalor;
@@ -161,18 +159,24 @@ void printLista(Nodo * lista){
     Nodo * currentNodo = lista;
 
     while (currentNodo != NULL){
-        printf("\
-        Nombre: %s \n\
-        Tipo: %s \n\
-        Valor entero: %d \n\
-        Valor float: %f \n\
-        Valor char: %c \n\
-         ->\n",
-        currentNodo->info->nombre,
-        currentNodo->info->tipo,
-        currentNodo->info->intvalor,
-        currentNodo->info->floatvalor,
-        currentNodo->info->charvalor);
+        
+        if (strcmp(currentNodo->info->tipo, "int") == 0){
+            printf("Tipo: int\n");
+            printf("Nombre: %s \n", currentNodo->info->nombre);
+            printf("Valor: %d\n", currentNodo->info->intvalor);
+        }
+        else if (strcmp(currentNodo->info->tipo, "float") == 0){
+            printf("TIpo: float\n");
+            printf("Nombre: %s \n", currentNodo->info->nombre);
+            printf("Valor: %f\n", currentNodo->info->floatvalor);
+        }
+        else if (strcmp(currentNodo->info->tipo, "char") == 0){
+            printf("Tipo: char\n");
+            printf("Nombre: %s \n", currentNodo->info->nombre);
+            printf("Valor: %c\n", currentNodo->info->charvalor);
+        }
+
+        printf("-->\n");
         
         currentNodo = currentNodo->sig;
     }
@@ -185,29 +189,27 @@ void insertNodo(Nodo ** lista, Nodo * newNodo){
 
 int deleteNodo(Nodo ** lista, char nombre[]){
     Nodo * currentNodo = *lista;
+
+    //Busca en el primer nodo.
+    if (strcmp(currentNodo->info->nombre, nombre) == 0){
+        *lista = currentNodo->sig;
+        free(currentNodo);
+        return 1;
+    }
     
-    if (strcmp(currentNodo->info->nombre, nombre) != 0){
-        
-        while ((currentNodo->sig != NULL) && (strcmp(currentNodo->sig->info->nombre, nombre)) != 0){
-            currentNodo = currentNodo->sig;
-            currentNodo->sig = currentNodo->sig->sig;
-        }
-        
-        if (currentNodo->sig != NULL){
+    //Apartir de aquí hace la búsqueda apartir del '->sig'.
+    while (currentNodo->sig != NULL){
+
+        if (strcmp(currentNodo->sig->info->nombre, nombre) == 0){
             currentNodo->sig = currentNodo->sig->sig;
             free(currentNodo->sig);
-            
             return 1;
         }
         else {
-            return -1;
+            currentNodo = currentNodo->sig;
         }
-        
     }
-    else {
-        *lista = currentNodo->sig;
-        free(currentNodo);
-        
-        return 1;
-    }
+
+    //Si llega aquí es que no lo encontró.
+    return -1;
 }
