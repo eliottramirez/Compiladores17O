@@ -129,7 +129,7 @@ void printLista(Nodo * lista){
         
         if (strcmp(currentNodo->info->tipo, "int") == 0){
             printf("Tipo: int\n");
-            printf("Nombre: %s \n", currentNodo->info->nombre);
+            printf("Nombre: %s\n", currentNodo->info->nombre);
             printf("Valor: %d\n", currentNodo->info->intvalor);
         }
         else if (strcmp(currentNodo->info->tipo, "float") == 0){
