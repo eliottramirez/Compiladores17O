@@ -106,7 +106,6 @@ int main(){
                     intvalor = 0;
                     floatvalor = 0;
                     scanf(" %c", &charvalor);
-                    
                 }
                 
                 insertNodo(&lista, initNodo(tipo, nombre, intvalor, floatvalor, charvalor));
