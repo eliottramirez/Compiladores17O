@@ -15,42 +15,10 @@ typedef struct Nodos {
     struct Nodos * sig;
 } Nodo;
 
-/**
-    Inicializa un Nodo.
-    
-    @param tipo
-    @param nombre
-    @param intvalor
-    @param floatvalor
-    @param charvalor
- 
-    @return Un 'Nodo *' inicializado
-*/
 Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor);
-
-/**
-	Imprime en pantalla una lista ligada.
- 
-	@param lista Lista ligada a imprimir (nodo cabeza).
-*/
 void printLista(Nodo * lista);
-
-/**
-	Inserta un nodo al principio de una lista ligada.
- 
-	@param lista
-	@param newNodo
-*/
 void insertNodo(Nodo ** lista, Nodo * newNodo);
-
-/**
-	Elimina un nodo de una lista ligada encontrado por su nombre.
- 
-	@param lista
-	@param nombre[]
-*/
 int deleteNodo(Nodo ** lista, char nombre[]);
-
 
 Nodo * lista = NULL;
 
