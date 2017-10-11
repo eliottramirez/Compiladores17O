@@ -35,20 +35,16 @@ void printTablaHash(Nodo * tablaHash[]);
 Nodo * tablaHash[SIZE];
 
 int main(){
-    int i;
-    int status;
     int menu = 0;
 
-    for (i = 0; i < SIZE; i++){
+    for (int i = 0; i < SIZE; i++){
         tablaHash[i] = NULL;
     }    
-    
-    printf("Bienvenido. ");
     
     while (menu != 6){
         
         if (menu == 0){
-            printf("¿Qué desea hacer?:\n\
+            printf("\n¿Qué desea hacer?:\n\
                    1. Dar de alta una variable.\n\
                    2. Dar de baja una variable.\n\
                    3. Buscar una variable.\n\
@@ -119,18 +115,18 @@ int main(){
         }
         else if (menu == 3){
             char nombre[40];
-            Nodo * encontrado;
+            Nodo * found;
 
             printf("Proporcione el nombre de la variable a buscar: \n");
             scanf("%s", nombre);
             
-            encontrado = search(tablaHash, nombre);
+            found = search(tablaHash, nombre);
             
-            if (encontrado != NULL){
+            if (found != NULL){
                 printf("Variable encontrada:\n");
-                printNodo(encontrado);
+                printNodo(found);
             }
-            else if (encontrado == NULL){
+            else if (found == NULL){
                 printf("Variable no encontrada.\n");
             }
             
@@ -172,29 +168,28 @@ int delete(Nodo * tablaHash[], char nombre[]){
     int status;
     
     for (int i = 0; i < SIZE; i++){
+        
         status = deleteNodo(&tablaHash[i], nombre);
-        if (status == 1){
-            break;
-        }
+        if (status == 1) break;
     } 
    
     return status;
 }
 
 Nodo * search(Nodo * tablaHash[], char nombre[]){
-    Nodo * encontrado;
+    Nodo * found;
 
     for (int i = 0; i < SIZE; i++){
-        encontrado = searchNodo(tablaHash[i], nombre);
-        if (encontrado != NULL){
-            break;
-        }
+        
+        found = searchNodo(tablaHash[i], nombre);
+        if (found != NULL) break;
     }
 
-    return encontrado;
+    return found;
 }
 
 void nullTH(Nodo * tablaHash[]){
+
     for (int i = 0; i < SIZE; i++){
         nullLL(&tablaHash[i]);
         tablaHash[i] = NULL;
@@ -202,6 +197,7 @@ void nullTH(Nodo * tablaHash[]){
 } 
 
 void printTablaHash(Nodo * tablaHash[]){
+
     for (int i = 0; i < SIZE; i++){
         printLista(tablaHash[i]);
     }
@@ -221,6 +217,7 @@ Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char
 }
 
 void insertNodo(Nodo ** lista, Nodo * newNodo){
+
     newNodo->sig = *lista;
     *lista = newNodo;
 }
@@ -228,9 +225,7 @@ void insertNodo(Nodo ** lista, Nodo * newNodo){
 int deleteNodo(Nodo ** lista, char nombre[]){
     Nodo * currentNodo = *lista;
 
-    if (currentNodo == NULL){
-        return -1;
-    }
+    if (currentNodo == NULL) return -1;
 
     //Busca en el primer nodo.
     if (strcmp(currentNodo->info->nombre, nombre) == 0){
@@ -259,9 +254,7 @@ int deleteNodo(Nodo ** lista, char nombre[]){
 Nodo * searchNodo(Nodo * lista, char nombre[]){
     Nodo * currentNodo = lista;
 
-    if (currentNodo == NULL){
-        return NULL;
-    }
+    if (currentNodo == NULL) return NULL;
 
     if (strcmp(currentNodo->info->nombre, nombre) == 0){
         return currentNodo;
@@ -286,7 +279,6 @@ void nullLL(Nodo ** lista){
 
     while (currentNodo != NULL){
         nextNodo = currentNodo->sig;
-        
         free(currentNodo);
         currentNodo = nextNodo;
     }
@@ -296,14 +288,13 @@ void printLista(Nodo * lista){
     Nodo * currentNodo = lista;
 
     while (currentNodo != NULL){
-        
         printNodo(currentNodo);
-        
         currentNodo = currentNodo->sig;
     }
 }
 
 void printNodo(Nodo * nodo){
+
     if (strcmp(nodo->info->tipo, "int") == 0){
         printf("Tipo: int\n");
         printf("Nombre: %s\n", nodo->info->nombre);
