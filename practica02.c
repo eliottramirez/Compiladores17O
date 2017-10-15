@@ -126,7 +126,7 @@ int main(){
                 printf("Variable encontrada:\n");
                 printNodo(found);
             }
-            else if (found == NULL){
+            else {
                 printf("Variable no encontrada.\n");
             }
             
