@@ -154,8 +154,7 @@ int fDispersion(char nombre[]){
        suma = suma + nombre[i];
     }
 
-    suma = suma % SIZE;
-    return suma;
+    return (suma % SIZE);
 }
 
 void insert(Nodo * tablaHash[], Nodo * newNodo){
@@ -205,8 +204,8 @@ void printTablaHash(Nodo * tablaHash[]){
 
 Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor){
     Nodo * newNodo = malloc(sizeof(Nodo));
-    
     newNodo->info = malloc(sizeof(Info));
+    
     strcpy(newNodo->info->tipo, tipo);
     strcpy(newNodo->info->nombre, nombre);
     newNodo->info->intvalor = intvalor;
@@ -254,20 +253,9 @@ int deleteNodo(Nodo ** lista, char nombre[]){
 Nodo * searchNodo(Nodo * lista, char nombre[]){
     Nodo * currentNodo = lista;
 
-    if (currentNodo == NULL) return NULL;
-
-    if (strcmp(currentNodo->info->nombre, nombre) == 0){
-        return currentNodo;
-    }
-
-    while (currentNodo->sig != NULL){
-        
-        if (strcmp(currentNodo->sig->info->nombre, nombre) == 0){
-            return currentNodo;
-        }
-        else {
-            currentNodo = currentNodo->sig;
-        }
+    while (currentNodo != NULL){
+        if (strcmp(currentNodo->info->nombre, nombre) == 0) return currentNodo;
+        else currentNodo = currentNodo->sig;
     }
 
     return NULL;

@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Informacion {
     char nombre[40];
     char tipo[10];
     int intvalor;
