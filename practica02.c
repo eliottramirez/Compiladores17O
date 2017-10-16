@@ -244,7 +244,6 @@ int deleteNodo(Nodo ** lista, char nombre[]){
         }
     }
 
-    //Si llega aquí es que no lo encontró.
     return -1;
 }
 
