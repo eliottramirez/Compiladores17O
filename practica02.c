@@ -14,7 +14,7 @@ typedef struct structInfo {
 
 typedef struct structNodo {
     struct structInfo * info;
-    struct structNodo * sig;
+    struct structNodo * next;
 } Nodo;
 
 Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor);
@@ -96,17 +96,17 @@ int main(){
         }
         else if (menu == 2){
             char nombre[40];
-            int status = 0;
+            int found = 0;
             
             printf("Proporcione el nombre de la variable a eliminar: \n");
             scanf("%s", nombre);
             
-            status = delete(tablaHash, nombre);
+            found = delete(tablaHash, nombre);
             
-            if (status == 1){
+            if (found == 1){
                 printf("Variable encontrada y eliminada.\n");
             }
-            else if (status == -1){
+            else if (found == -1){
                 printf("Variable no encontrada.\n");
             }
             
@@ -162,14 +162,14 @@ void insert(Nodo * tablaHash[], Nodo * newNodo){
 }
 
 int delete(Nodo * tablaHash[], char nombre[]){
-    int status;
+    int found;
     
     for (int i = 0; i < SIZE; i++){
-        status = deleteNodo(&tablaHash[i], nombre);
-        if (status == 1) break;
+        found = deleteNodo(&tablaHash[i], nombre);
+        if (found == 1) break;
     } 
    
-    return status;
+    return found;
 }
 
 Nodo * search(Nodo * tablaHash[], char nombre[]){
@@ -213,32 +213,33 @@ Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char
 
 void insertNodo(Nodo ** lista, Nodo * newNodo){
 
-    newNodo->sig = *lista;
+    newNodo->next = *lista;
     *lista = newNodo;
 }
 
 int deleteNodo(Nodo ** lista, char nombre[]){
-    Nodo * currentNodo = *lista;
-
-    if (currentNodo == NULL) return -1;
-
+    Nodo * current = *lista;
+    Nodo * toDelete;
+    
+    if (current == NULL) return -1;
     //Busca en el primer nodo.
-    if (strcmp(currentNodo->info->nombre, nombre) == 0){
-        *lista = currentNodo->sig;
-        free(currentNodo);
+    if (strcmp(current->info->nombre, nombre) == 0){
+        *lista = current->next;
+        free(current);
         return 1;
     }
     
-    //Apartir de aquí hace la búsqueda apartir del '->sig'.
-    while (currentNodo->sig != NULL){
+    //Apartir de aquí hace la búsqueda apartir del '->next'.
+    while (current->next != NULL){
 
-        if (strcmp(currentNodo->sig->info->nombre, nombre) == 0){
-            currentNodo->sig = currentNodo->sig->sig;
-            free(currentNodo->sig);
+        if (strcmp(current->next->info->nombre, nombre) == 0){
+            toDelete = current->next;
+            current->next = current->next->next;
+            free(toDelete);
             return 1;
         }
         else {
-            currentNodo = currentNodo->sig;
+            current = current->next;
         }
     }
 
@@ -246,37 +247,37 @@ int deleteNodo(Nodo ** lista, char nombre[]){
 }
 
 Nodo * searchNodo(Nodo * lista, char nombre[]){
-    Nodo * currentNodo = lista;
+    Nodo * current = lista;
 
-    while (currentNodo != NULL){
-        if (strcmp(currentNodo->info->nombre, nombre) == 0) return currentNodo;
-        else currentNodo = currentNodo->sig;
+    while (current != NULL){
+        if (strcmp(current->info->nombre, nombre) == 0) break;
+        else current = current->next;
     }
 
-    return NULL;
+    return current;
 }
 
-void nullLL(Nodo ** lista){
-    Nodo * currentNodo = *lista;
-    Nodo * nextNodo;
+void nullLL(Nodo **lista){
+    Nodo *current = *lista;
+    Nodo *next;
 
-    while (currentNodo != NULL){
-        nextNodo = currentNodo->sig;
-        free(currentNodo);
-        currentNodo = nextNodo;
-    }
-}
-
-void printLista(Nodo * lista){
-    Nodo * currentNodo = lista;
-
-    while (currentNodo != NULL){
-        printNodo(currentNodo);
-        currentNodo = currentNodo->sig;
+    while (current != NULL){
+        next = current->next;
+        free(current);
+        current = next;
     }
 }
 
-void printNodo(Nodo * nodo){
+void printLista(Nodo *lista){
+    Nodo *current = lista;
+
+    while (current != NULL){
+        printNodo(current);
+        current = current->next;
+    }
+}
+
+void printNodo(Nodo *nodo){
 
     if (strcmp(nodo->info->tipo, "int") == 0){
         printf("Tipo: int\n");
