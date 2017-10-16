@@ -22,14 +22,16 @@ void insertNodo(Nodo ** lista, Nodo * newNodo);
 int deleteNodo(Nodo ** lista, char nombre[]);
 Nodo * searchNodo(Nodo * lista, char nombre[]);
 void printNodo(Nodo * nodo);
-void nullLL(Nodo ** lista);
+
+void purgeLista(Nodo ** lista);
 void printLista(Nodo * lista);
 
 int fHash(char nombre[]);
 void insert(Nodo * tablaHash[], Nodo * newNodo);
 int delete(Nodo *tablaHash[], char nombre[]);
 Nodo * search(Nodo * tablaHash[], char nombre[]);
-void nullTH(Nodo * tablaHash[]);
+
+void purgeTablaHash(Nodo * tablaHash[]);
 void printTablaHash(Nodo * tablaHash[]);
 
 Nodo * tablaHash[SIZE];
@@ -136,7 +138,7 @@ int main(){
             menu = 0;
         }
         else if (menu == 5){
-            nullTH(tablaHash);
+            purgeTablaHash(tablaHash);
             menu = 0;
         }
         else {
@@ -183,10 +185,10 @@ Nodo * search(Nodo * tablaHash[], char nombre[]){
     return found;
 }
 
-void nullTH(Nodo * tablaHash[]){
+void purgeTablaHash(Nodo * tablaHash[]){
 
     for (int i = 0; i < SIZE; i++){
-        nullLL(&tablaHash[i]);
+        purgeLista(&tablaHash[i]);
         tablaHash[i] = NULL;
     }
 } 
@@ -257,7 +259,7 @@ Nodo * searchNodo(Nodo * lista, char nombre[]){
     return current;
 }
 
-void nullLL(Nodo **lista){
+void purgeLista(Nodo **lista){
     Nodo *current = *lista;
     Nodo *next;
 
