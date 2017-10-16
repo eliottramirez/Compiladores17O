@@ -4,7 +4,7 @@
 
 #define SIZE 31
 
-typedef struct Informacion {
+typedef struct structInfo {
     char nombre[40];
     char tipo[10];
     int intvalor;
@@ -12,9 +12,9 @@ typedef struct Informacion {
     char charvalor;
 } Info;
 
-typedef struct Nodos {
-    struct Informacion * info;
-    struct Nodos * sig;
+typedef struct structNodo {
+    struct structInfo * info;
+    struct structNodo * sig;
 } Nodo;
 
 Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor);
