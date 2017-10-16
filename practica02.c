@@ -165,7 +165,6 @@ int delete(Nodo * tablaHash[], char nombre[]){
     int status;
     
     for (int i = 0; i < SIZE; i++){
-        
         status = deleteNodo(&tablaHash[i], nombre);
         if (status == 1) break;
     } 
@@ -177,7 +176,6 @@ Nodo * search(Nodo * tablaHash[], char nombre[]){
     Nodo * found;
 
     for (int i = 0; i < SIZE; i++){
-        
         found = searchNodo(tablaHash[i], nombre);
         if (found != NULL) break;
     }
