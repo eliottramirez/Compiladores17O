@@ -25,7 +25,7 @@ void printNodo(Nodo * nodo);
 void nullLL(Nodo ** lista);
 void printLista(Nodo * lista);
 
-int fDispersion(char nombre[]);
+int fHash(char nombre[]);
 void insert(Nodo * tablaHash[], Nodo * newNodo);
 int delete(Nodo *tablaHash[], char nombre[]);
 Nodo * search(Nodo * tablaHash[], char nombre[]);
@@ -50,8 +50,7 @@ int main(){
                    3. Buscar una variable.\n\
                    4. Imprimir la tabla de variables.\n\
                    5. Limpiar la lista tabla de variables.\n\
-                   6. Salir.\n\
-                   ");
+                   6. Salir.\n");
             
             scanf("%d", &menu);
         }
@@ -147,7 +146,7 @@ int main(){
     }
 }
 
-int fDispersion(char nombre[]){
+int fHash(char nombre[]){
     int suma = 0;
     
     for (int i = 0; i < strlen(nombre); i++){
@@ -159,8 +158,7 @@ int fDispersion(char nombre[]){
 
 void insert(Nodo * tablaHash[], Nodo * newNodo){
     
-    int n = fDispersion(newNodo->info->nombre);
-    insertNodo(&tablaHash[n], newNodo);
+    insertNodo(&tablaHash[fHash(newNodo->info->nombre)], newNodo);
 }
 
 int delete(Nodo * tablaHash[], char nombre[]){
