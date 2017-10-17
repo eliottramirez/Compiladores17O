@@ -221,27 +221,28 @@ void insertNodo(Nodo ** lista, Nodo * newNodo){
 
 int deleteNodo(Nodo ** lista, char nombre[]){
     Nodo * current = *lista;
-    Nodo * toDelete;
+    Nodo * next = current->next;
     
     if (current == NULL) return -1;
     //Busca en el primer nodo.
     if (strcmp(current->info->nombre, nombre) == 0){
-        *lista = current->next;
+        
+        *lista = next;
         free(current);
         return 1;
     }
     
-    //Apartir de aquí hace la búsqueda apartir del '->next'.
-    while (current->next != NULL){
+    //Apartir de aquí hace la búsqueda apartir del 'next'.
+    while (next != NULL){
 
-        if (strcmp(current->next->info->nombre, nombre) == 0){
-            toDelete = current->next;
-            current->next = current->next->next;
-            free(toDelete);
+        if (strcmp(next->info->nombre, nombre) == 0){
+            current->next = next->next;
+            free(next);
             return 1;
         }
         else {
-            current = current->next;
+            current = next;
+            next = current->next;
         }
     }
 
