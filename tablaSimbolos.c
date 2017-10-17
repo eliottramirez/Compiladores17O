@@ -154,6 +154,7 @@ void initMenu(){
         }
 }
 
+#pragma region metodos
 int fHash(char nombre[]){
     int suma = 0;
     
@@ -306,3 +307,9 @@ void printNodo(Nodo *nodo){
 
     printf("-->\n");
 }
+#pragma endregion
+
+#pragma region test
+
+
+#pragma endregion
