@@ -19,6 +19,7 @@ typedef struct structNodo {
 
 void initMenu();
 
+#pragma region dMetodos
 Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor);
 void insertNodo(Nodo ** lista, Nodo * newNodo);
 int deleteNodo(Nodo ** lista, char nombre[]);
@@ -35,19 +36,21 @@ Nodo * search(Nodo * tablaHash[], char nombre[]);
 
 void purgeTablaHash(Nodo * tablaHash[]);
 void printTablaHash(Nodo * tablaHash[]);
+#pragma endregion
 
 Nodo * tablaHash[SIZE];
 
 int main(){
-    initMenu();
+
+    for (int i = 0; i < SIZE; i++){
+        tablaHash[i] = NULL;
+    }
+
+    //initMenu();
 }
 
 void initMenu(){
-    int menu = 0;
-    
-        for (int i = 0; i < SIZE; i++){
-            tablaHash[i] = NULL;
-        }    
+    int menu = 0;   
         
         while (menu != 6){
             
@@ -159,7 +162,7 @@ int fHash(char nombre[]){
     int suma = 0;
     
     for (int i = 0; i < strlen(nombre); i++){
-       suma = suma + nombre[i];
+       suma += nombre[i];
     }
 
     return (suma % SIZE);
@@ -171,12 +174,12 @@ void insert(Nodo * tablaHash[], Nodo * newNodo){
 }
 
 int delete(Nodo * tablaHash[], char nombre[]){
-    int found;
+    int found = -1;
     
     for (int i = 0; i < SIZE; i++){
         found = deleteNodo(&tablaHash[i], nombre);
         if (found == 1) break;
-    } 
+    }
    
     return found;
 }
@@ -227,10 +230,17 @@ void insertNodo(Nodo ** lista, Nodo * newNodo){
 }
 
 int deleteNodo(Nodo ** lista, char nombre[]){
-    Nodo * current = *lista;
-    Nodo * next = current->next;
+    Nodo * current;
+    Nodo * next;
     
-    if (current == NULL) return -1;
+    if (*lista == NULL){
+        return -1;
+    }
+    else {
+        current = *lista;
+        next = current->next;
+    }
+
     //Busca en el primer nodo.
     if (strcmp(current->info->nombre, nombre) == 0){
         
@@ -239,7 +249,7 @@ int deleteNodo(Nodo ** lista, char nombre[]){
         return 1;
     }
     
-    //Apartir de aquí hace la búsqueda apartir del 'next'.
+    //Apartir de aquí hace la búsqueda apartir del next.
     while (next != NULL){
 
         if (strcmp(next->info->nombre, nombre) == 0){
@@ -307,9 +317,4 @@ void printNodo(Nodo *nodo){
 
     printf("-->\n");
 }
-#pragma endregion
-
-#pragma region test
-
-
 #pragma endregion
