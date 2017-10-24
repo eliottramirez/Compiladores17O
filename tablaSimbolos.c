@@ -19,24 +19,21 @@ typedef struct structNodo {
 
 void initMenu();
 
-#pragma region dMetodos
 Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor);
 void insertNodo(Nodo ** lista, Nodo * newNodo);
 int deleteNodo(Nodo ** lista, char nombre[]);
 Nodo * searchNodo(Nodo * lista, char nombre[]);
 void printNodo(Nodo * nodo);
 
-void purgeLista(Nodo ** lista);
-void printLista(Nodo * lista);
-
 int fHash(char nombre[]);
 void insert(Nodo * tablaHash[], Nodo * newNodo);
 int delete(Nodo *tablaHash[], char nombre[]);
 Nodo * search(Nodo * tablaHash[], char nombre[]);
 
+void purgeLista(Nodo ** lista);
+void printLista(Nodo * lista);
 void purgeTablaHash(Nodo * tablaHash[]);
 void printTablaHash(Nodo * tablaHash[]);
-#pragma endregion
 
 Nodo * tablaHash[SIZE];
 
@@ -157,11 +154,11 @@ void initMenu(){
         }
 }
 
-#pragma region metodos
 int fHash(char nombre[]){
     int suma = 0;
+    int len = strlen(nombre);
     
-    for (int i = 0; i < strlen(nombre); i++){
+    for (int i = 0; i < len; i++){
        suma += nombre[i];
     }
 
@@ -317,4 +314,3 @@ void printNodo(Nodo *nodo){
 
     printf("-->\n");
 }
-#pragma endregion
