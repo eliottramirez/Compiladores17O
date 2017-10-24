@@ -1,0 +1,6 @@
+%{
+    int numLinea = 0;
+%}
+%%
+'\n'    {numLinea++;}
+.   ;
