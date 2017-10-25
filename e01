@@ -1,5 +1,0 @@
-%%
-a   {
-    printf("A");
-    return;
-    }
