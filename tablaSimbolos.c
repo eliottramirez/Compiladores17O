@@ -18,6 +18,7 @@ typedef struct structNodo {
 } Nodo;
 
 void initMenu();
+void initTabla();
 
 Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor);
 void insertNodo(Nodo ** lista, Nodo * newNodo);
@@ -37,13 +38,17 @@ void printTablaHash(Nodo * tablaHash[]);
 
 Nodo * tablaHash[SIZE];
 
-int main(){
+/*int main(){
 
+    //initTabla();
+
+    //initMenu();
+}*/
+
+void initTabla(){
     for (int i = 0; i < SIZE; i++){
         tablaHash[i] = NULL;
     }
-
-    //initMenu();
 }
 
 void initMenu(){
