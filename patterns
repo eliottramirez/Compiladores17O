@@ -11,9 +11,9 @@ d   [0-9]
 \n          {numLinea++;}
 " "         {/*Espacio en blanco;*/}
 
-int         {return 22;}
-float       {return 23;}
-char        {return 24;}
+entero         {return 22;}
+flotante       {return 23;}
+caracter        {return 24;}
 si          {return 25;}
 entonces    {return 26;}
 otro        {return 27;}
@@ -24,7 +24,7 @@ directiva   {return 31;}
 paraleliza  {return 32;}
 
 {l}({l}|{d})*   {
-    valorString = yytext;
+    strcpy(valorString, yytext);
     return 1;
 }
 {d}+    {

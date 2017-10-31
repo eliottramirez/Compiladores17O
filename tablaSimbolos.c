@@ -78,7 +78,7 @@ void initMenu(){
                 printf("Proporcione tipo de la variable: \n");
                 scanf("%s", tipo);
                 
-                if ((strcmp("int", tipo) != 0) && (strcmp("float", tipo) != 0) && (strcmp("char", tipo) != 0)){
+                if ((strcmp("entero", tipo) != 0) && (strcmp("flotante", tipo) != 0) && (strcmp("caracter", tipo) != 0)){
                     printf("Tipo inválido.\n");
                     menu = 0;
                 }
@@ -87,17 +87,17 @@ void initMenu(){
                     scanf("%s", nombre);
                     
                     printf("Proporcione valor de la variable: \n");
-                    if (strcmp("int", tipo) == 0){
+                    if (strcmp("entero", tipo) == 0){
                         scanf("%d", &intvalor);
                         floatvalor = 0;
                         charvalor = '\0';
                     }
-                    else if (strcmp("float", tipo) == 0){
+                    else if (strcmp("flotante", tipo) == 0){
                         intvalor = 0;
                         scanf("%f", &floatvalor);
                         charvalor = '\0';
                     }
-                    else if (strcmp("char", tipo) == 0){
+                    else if (strcmp("caracter", tipo) == 0){
                         intvalor = 0;
                         floatvalor = 0;
                         scanf(" %c", &charvalor);
@@ -302,17 +302,17 @@ void printLista(Nodo *lista){
 void printNodo(Nodo *nodo){
 
     if (strcmp(nodo->info->tipo, "int") == 0){
-        printf("Tipo: int\n");
+        printf("Tipo: %s\n", nodo->info->tipo);
         printf("Nombre: %s\n", nodo->info->nombre);
         printf("Valor: %d\n", nodo->info->intvalor);
     }
     else if (strcmp(nodo->info->tipo, "float") == 0){
-        printf("TIpo: float\n");
+        printf("Tipo: %s\n", nodo->info->tipo);
         printf("Nombre: %s \n", nodo->info->nombre);
         printf("Valor: %f\n", nodo->info->floatvalor);
     }
     else if (strcmp(nodo->info->tipo, "char") == 0){
-        printf("Tipo: char\n");
+        printf("Tipo: %s\n", nodo->info->tipo);
         printf("Nombre: %s \n", nodo->info->nombre);
         printf("Valor: %c\n", nodo->info->charvalor);
     }
