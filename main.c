@@ -9,8 +9,8 @@
 
 int yywrap();
 
-int valorNum;
-char *valorString;
+/*int valorNum;
+char *valorString;*/
 int idToken;
 
 int main (int argc, char *argv[]){
@@ -18,9 +18,8 @@ int main (int argc, char *argv[]){
     
     idToken = yylex();
     while(idToken != 0){
-        
-        printf("%d\n", idToken);
-        
+        printf("%d: %s\n", idToken, yytext);
+       
         idToken = yylex();
     }
 

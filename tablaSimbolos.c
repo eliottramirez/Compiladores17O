@@ -6,7 +6,7 @@
 
 typedef struct structInfo {
     char nombre[40];
-    char tipo[10];
+    char tipo[15];
     int intvalor;
     float floatvalor;
     char charvalor;
@@ -301,17 +301,17 @@ void printLista(Nodo *lista){
 
 void printNodo(Nodo *nodo){
 
-    if (strcmp(nodo->info->tipo, "int") == 0){
+    if (strcmp(nodo->info->tipo, "entero") == 0){
         printf("Tipo: %s\n", nodo->info->tipo);
         printf("Nombre: %s\n", nodo->info->nombre);
         printf("Valor: %d\n", nodo->info->intvalor);
     }
-    else if (strcmp(nodo->info->tipo, "float") == 0){
+    else if (strcmp(nodo->info->tipo, "flotante") == 0){
         printf("Tipo: %s\n", nodo->info->tipo);
         printf("Nombre: %s \n", nodo->info->nombre);
         printf("Valor: %f\n", nodo->info->floatvalor);
     }
-    else if (strcmp(nodo->info->tipo, "char") == 0){
+    else if (strcmp(nodo->info->tipo, "caracter") == 0){
         printf("Tipo: %s\n", nodo->info->tipo);
         printf("Nombre: %s \n", nodo->info->nombre);
         printf("Valor: %c\n", nodo->info->charvalor);

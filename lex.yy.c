@@ -504,9 +504,9 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "patterns"
 #line 2 "patterns"
-    int numLinea = 1;
-    extern int valorNum;
-    extern char *valorString;
+    int numLinea = 0;
+    //extern int valorNum;
+    //extern char *valorString;
     //extern Nodo * apID;
 #line 511 "lex.yy.c"
 #line 512 "lex.yy.c"
@@ -802,178 +802,178 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 14 "patterns"
+#line 13 "patterns"
 {return 22;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 15 "patterns"
+#line 14 "patterns"
 {return 23;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 16 "patterns"
+#line 15 "patterns"
 {return 24;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 17 "patterns"
+#line 16 "patterns"
 {return 25;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 18 "patterns"
+#line 17 "patterns"
 {return 26;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 19 "patterns"
+#line 18 "patterns"
 {return 27;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 20 "patterns"
+#line 19 "patterns"
 {return 28;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 21 "patterns"
+#line 20 "patterns"
 {return 29;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 22 "patterns"
+#line 21 "patterns"
 {return 30;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 23 "patterns"
+#line 22 "patterns"
 {return 31;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 24 "patterns"
+#line 23 "patterns"
 {return 32;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 26 "patterns"
+#line 24 "patterns"
 {
-    strcpy(valorString, yytext);
+    /*strcpy(valorString, yytext);*/
     return 1;
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 30 "patterns"
+#line 28 "patterns"
 {
-    valorNum = atoi(yytext);
+    /*valorNum = atoi(yytext);*/
     return 2;
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 35 "patterns"
+#line 32 "patterns"
 {return 3;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 36 "patterns"
+#line 33 "patterns"
 {return 4;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 37 "patterns"
+#line 34 "patterns"
 {return 5;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 38 "patterns"
+#line 35 "patterns"
 {return 6;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 39 "patterns"
+#line 36 "patterns"
 {return 7;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 40 "patterns"
+#line 37 "patterns"
 {return 8;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 41 "patterns"
+#line 38 "patterns"
 {return 9;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 42 "patterns"
+#line 39 "patterns"
 {return 10;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 43 "patterns"
+#line 40 "patterns"
 {return 11;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 44 "patterns"
+#line 41 "patterns"
 {return 12;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 45 "patterns"
+#line 42 "patterns"
 {return 13;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 46 "patterns"
+#line 43 "patterns"
 {return 14;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 47 "patterns"
+#line 44 "patterns"
 {return 15;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 48 "patterns"
+#line 45 "patterns"
 {return 16;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 49 "patterns"
+#line 46 "patterns"
 {return 17;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 50 "patterns"
+#line 47 "patterns"
 {return 18;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 51 "patterns"
+#line 48 "patterns"
 {return 19;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 52 "patterns"
+#line 49 "patterns"
 {return 20;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 53 "patterns"
+#line 50 "patterns"
 {return 21;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 55 "patterns"
+#line 51 "patterns"
 {printf("Error.\n");}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 56 "patterns"
+#line 52 "patterns"
 ECHO;
 	YY_BREAK
 #line 979 "lex.yy.c"
@@ -1979,5 +1979,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 56 "patterns"
+#line 52 "patterns"
+
 

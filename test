@@ -19,9 +19,9 @@ a
 -
 *
 /
-int
-float
-char
+entero
+flotante
+caracter
 si
 entonces
 otro
