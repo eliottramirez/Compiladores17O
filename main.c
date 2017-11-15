@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "tablaSimbolos.c"
+#include "tablas.c"
 #include "lex.yy.c"
 
 //extern Nodo *apID;
 
 int yywrap();
 
-/*int valorNum;
-char *valorString;*/
+int valorNum;
+char *valorString;
 int idToken;
 
 int main (int argc, char *argv[]){

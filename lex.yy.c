@@ -502,11 +502,11 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "patterns"
-#line 2 "patterns"
+#line 1 "spec.flex"
+#line 2 "spec.flex"
     int numLinea = 0;
-    //extern int valorNum;
-    //extern char *valorString;
+    extern int valorNum;
+    extern char *valorString;
     //extern Nodo * apID;
 #line 511 "lex.yy.c"
 #line 512 "lex.yy.c"
@@ -726,7 +726,7 @@ YY_DECL
 		}
 
 	{
-#line 9 "patterns"
+#line 9 "spec.flex"
 
 #line 731 "lex.yy.c"
 
@@ -786,194 +786,194 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case YY_STATE_EOF(INITIAL):
-#line 10 "patterns"
+#line 10 "spec.flex"
 {return 0;}
 	YY_BREAK
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 11 "patterns"
+#line 11 "spec.flex"
 {numLinea++;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 12 "patterns"
+#line 12 "spec.flex"
 {/*Espacio en blanco;*/}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 13 "patterns"
+#line 13 "spec.flex"
 {return 22;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 14 "patterns"
+#line 14 "spec.flex"
 {return 23;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 15 "patterns"
+#line 15 "spec.flex"
 {return 24;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 16 "patterns"
+#line 16 "spec.flex"
 {return 25;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 17 "patterns"
+#line 17 "spec.flex"
 {return 26;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 18 "patterns"
+#line 18 "spec.flex"
 {return 27;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 19 "patterns"
+#line 19 "spec.flex"
 {return 28;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 20 "patterns"
+#line 20 "spec.flex"
 {return 29;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 21 "patterns"
+#line 21 "spec.flex"
 {return 30;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 22 "patterns"
+#line 22 "spec.flex"
 {return 31;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 23 "patterns"
+#line 23 "spec.flex"
 {return 32;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 24 "patterns"
+#line 24 "spec.flex"
 {
-    /*strcpy(valorString, yytext);*/
+    valorString = yytext;
     return 1;
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 28 "patterns"
+#line 28 "spec.flex"
 {
-    /*valorNum = atoi(yytext);*/
+    valorNum = atoi(yytext);
     return 2;
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 32 "patterns"
+#line 32 "spec.flex"
 {return 3;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 33 "patterns"
+#line 33 "spec.flex"
 {return 4;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 34 "patterns"
+#line 34 "spec.flex"
 {return 5;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 35 "patterns"
+#line 35 "spec.flex"
 {return 6;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 36 "patterns"
+#line 36 "spec.flex"
 {return 7;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 37 "patterns"
+#line 37 "spec.flex"
 {return 8;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 38 "patterns"
+#line 38 "spec.flex"
 {return 9;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 39 "patterns"
+#line 39 "spec.flex"
 {return 10;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 40 "patterns"
+#line 40 "spec.flex"
 {return 11;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 41 "patterns"
+#line 41 "spec.flex"
 {return 12;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 42 "patterns"
+#line 42 "spec.flex"
 {return 13;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 43 "patterns"
+#line 43 "spec.flex"
 {return 14;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 44 "patterns"
+#line 44 "spec.flex"
 {return 15;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 45 "patterns"
+#line 45 "spec.flex"
 {return 16;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 46 "patterns"
+#line 46 "spec.flex"
 {return 17;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 47 "patterns"
+#line 47 "spec.flex"
 {return 18;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 48 "patterns"
+#line 48 "spec.flex"
 {return 19;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 49 "patterns"
+#line 49 "spec.flex"
 {return 20;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 50 "patterns"
+#line 50 "spec.flex"
 {return 21;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 51 "patterns"
+#line 51 "spec.flex"
 {printf("Error.\n");}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 52 "patterns"
+#line 52 "spec.flex"
 ECHO;
 	YY_BREAK
 #line 979 "lex.yy.c"
@@ -1979,6 +1979,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 52 "patterns"
+#line 52 "spec.flex"
 
 
