@@ -10,17 +10,21 @@ d   [0-9]
 <<EOF>>     {return 0;}
 \n          {numLinea++;}
 " "         {/*Espacio en blanco;*/}
-entero         {return 22;}
-flotante       {return 23;}
-caracter        {return 24;}
-si          {return 25;}
-entonces    {return 26;}
-otro        {return 27;}
-mientras    {return 28;}
-haz         {return 29;}
-regresa     {return 30;}
-directiva   {return 31;}
-paraleliza  {return 32;}
+entero      {return 3;}
+flotante    {return 4;}
+caracter    {return 5;}
+si          {return 6;}
+entonces    {return 7;}
+otro        {return 8;}
+mientras    {return 9;}
+haz         {return 10;}
+regresa     {return 11;}
+directiva   {return 12;}
+paraleliza  {return 13;}
+incluye     {return 14;}
+define      {return 15;}
+funcion     {return 16;}
+funcionprincipal {return 17;}
 {l}({l}|{d})*   {
     valorString = yytext;
     return 1;
@@ -29,24 +33,23 @@ paraleliza  {return 32;}
     valorNum = atoi(yytext);
     return 2;
 }
-[;]     {return 3;}
-[,]     {return 4;}
-[(]     {return 5;}
-[)]     {return 6;}
-[{]     {return 7;}
-[}]     {return 8;}
-[[]     {return 9;}
-[]]     {return 10;}
-">="    {return 11;}
-"<="    {return 12;}
-[>]     {return 13;}
-[<]     {return 14;}
-[=]     {return 15;}
-"!="    {return 16;}
-"=="    {return 17;}
-[+]     {return 18;}
-[-]     {return 19;}
-[*]     {return 20;}
-"/"     {return 21;}
+[;]     {return 18;}
+[,]     {return 19;}
+[(]     {return 20;}
+[)]     {return 21;}
+[{]     {return 22;}
+[}]     {return 23;}
+">="    {return 24;}
+"<="    {return 25;}
+[>]     {return 26;}
+[<]     {return 27;}
+[=]     {return 28;}
+"<>"    {return 29;}
+[+]     {return 30;}
+[-]     {return 31;}
+[*]     {return 32;}
+"/"     {return 33;}
+"#"     {return 34;}
+"."     {return 35;}
 .       {printf("Error.\n");}
 %%
