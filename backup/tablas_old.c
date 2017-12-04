@@ -27,7 +27,7 @@ Nodo * searchNodo(Nodo * lista, char nombre[]);
 void printNodo(Nodo * nodo);
 
 int fHash(char nombre[]);
-Nodo * insert(Nodo * tabla[], Nodo * newNodo);
+void insert(Nodo * tabla[], Nodo * newNodo);
 int delete(Nodo *tabla[], char nombre[]);
 Nodo * search(Nodo * tabla[], char nombre[]);
 
@@ -43,51 +43,9 @@ Nodo * apID;
 
 /*int main(){
 
-    initTablas();
+    //initTablas();
 
-    insert(tablaLocal, initNodo("entero", "a", 1, 0.0, '\0'));
-    insert(tablaLocal, initNodo("flotante", "b", 0, 2.0, '\0'));
-    insert(tablaLocal, initNodo("caracter", "c", 0, 0.0, '3'));
-    insert(tablaLocal, initNodo("entero", "g", 7, 0.0, '\0'));
-    
-    insert(tablaGlobal, initNodo("entero", "d", 4, 0, '\0'));
-    insert(tablaGlobal, initNodo("flotante", "e", 0, 5.0, '\0'));
-    insert(tablaGlobal, initNodo("caracter", "f", 0, 0.0, '6'));
-    insert(tablaGlobal, initNodo("entero", "h", 8, 0.0, '\0'));
-
-    apID = search(tablaLocal, "g");
-    if (apID != NULL){
-        printf("\nEncontrado.\n");
-    }
-    else {
-        printf("\nNo encontrado.\n");
-    }
-    apID = search(tablaGlobal, "h");
-    if (apID != NULL){
-        printf("\nEncontrado.\n");
-    }
-    else {
-        printf("\nNo encontrado.\n");
-    }
-
-    delete(tablaLocal, "g");
-    delete(tablaGlobal, "h");
-
-    printTabla(tablaLocal);
-    printTabla(tablaGlobal);
-
-    purgeTabla(tablaLocal);
-    purgeTabla(tablaGlobal);
-
-    apID = insert(tablaLocal, initNodo("entero", "a", 1, 0.0, '\0'));
-    printNodo(apID);
-    insert(tablaLocal, initNodo("flotante", "b", 0, 2.0, '\0'));
-
-    insert(tablaGlobal, initNodo("entero", "d", 4, 0, '\0'));
-    insert(tablaGlobal, initNodo("flotante", "e", 0, 5.0, '\0'));
-
-    printTabla(tablaLocal);
-    printTabla(tablaGlobal);
+    //initMenu();
 }*/
 
 void initTablas(){
@@ -98,6 +56,114 @@ void initTablas(){
     for (int i = 0; i < SIZE; i++){
         tablaLocal[i] = NULL;
     }
+}
+
+void initMenu(){
+    int menu = 0;   
+        
+        while (menu != 6){
+            
+            if (menu == 0){
+                printf("\n¿Qué desea hacer?:\n\
+                       1. Dar de alta una variable.\n\
+                       2. Dar de baja una variable.\n\
+                       3. Buscar una variable.\n\
+                       4. Imprimir la tabla de variables.\n\
+                       5. Limpiar la lista tabla de variables.\n\
+                       6. Salir.\n");
+                
+                scanf("%d", &menu);
+            }
+            else if (menu == 1){
+                
+                char tipo[10];
+                char nombre[40];
+                int intvalor;
+                float floatvalor;
+                char charvalor;
+                
+                printf("Proporcione tipo de la variable: \n");
+                scanf("%s", tipo);
+                
+                if ((strcmp("entero", tipo) != 0) && (strcmp("flotante", tipo) != 0) && (strcmp("caracter", tipo) != 0)){
+                    printf("Tipo inválido.\n");
+                    menu = 0;
+                }
+                else {
+                    printf("Proporcione nombre de la variable: \n");
+                    scanf("%s", nombre);
+                    
+                    printf("Proporcione valor de la variable: \n");
+                    if (strcmp("entero", tipo) == 0){
+                        scanf("%d", &intvalor);
+                        floatvalor = 0;
+                        charvalor = '\0';
+                    }
+                    else if (strcmp("flotante", tipo) == 0){
+                        intvalor = 0;
+                        scanf("%f", &floatvalor);
+                        charvalor = '\0';
+                    }
+                    else if (strcmp("caracter", tipo) == 0){
+                        intvalor = 0;
+                        floatvalor = 0;
+                        scanf(" %c", &charvalor);
+                    }
+                    
+                    insert(tablaHash, initNodo(tipo, nombre, intvalor, floatvalor, charvalor));
+                    menu = 0;
+                }
+            }
+            else if (menu == 2){
+                char nombre[40];
+                int found = 0;
+                
+                printf("Proporcione el nombre de la variable a eliminar: \n");
+                scanf("%s", nombre);
+                
+                found = delete(tablaHash, nombre);
+                
+                if (found == 1){
+                    printf("Variable encontrada y eliminada.\n");
+                }
+                else if (found == -1){
+                    printf("Variable no encontrada.\n");
+                }
+                
+                menu = 0;
+            }
+            else if (menu == 3){
+                char nombre[40];
+                Nodo * found;
+    
+                printf("Proporcione el nombre de la variable a buscar: \n");
+                scanf("%s", nombre);
+                
+                found = search(tablaHash, nombre);
+                
+                if (found != NULL){
+                    printf("Variable encontrada:\n");
+                    printNodo(found);
+                }
+                else {
+                    printf("Variable no encontrada.\n");
+                }
+                
+                menu = 0;
+            }
+            else if (menu == 4){
+                printTablaHash(tablaHash);
+                menu = 0;
+            }
+            else if (menu == 5){
+                purgeTablaHash(tablaHash);
+                menu = 0;
+            }
+            else {
+                printf("Opción inválida.\n");
+                menu = 0;
+            }
+        }
 }
 
 int fHash(char nombre[]){
@@ -111,10 +177,9 @@ int fHash(char nombre[]){
     return (suma % SIZE);
 }
 
-Nodo * insert(Nodo * tabla[], Nodo * newNodo){
+void insert(Nodo * tabla[], Nodo * newNodo){
     
     insertNodo(&tabla[fHash(newNodo->info->nombre)], newNodo);
-    return search(tabla, newNodo->info->nombre);
 }
 
 int delete(Nodo * tabla[], char nombre[]){

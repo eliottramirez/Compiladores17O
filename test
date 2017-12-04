@@ -1,32 +1,6 @@
-a
-3
-;
-,
-(
-)
-{
+entero a, b;
+entero a;
+
+funcionprincipal (){
+    c = 3;
 }
-[
-]
->=
-<=
->
-<
-=
-!=
-==
-+
--
-*
-/
-entero
-flotante
-caracter
-si
-entonces
-otro
-mientras
-haz
-regresa
-directiva
-paraleliza
