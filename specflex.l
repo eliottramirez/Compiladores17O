@@ -32,7 +32,6 @@ define      {return (15);}
 funcion     {return (16);}
 funcionprincipal {return (17);}
 {l}({l}|{d})*   {
-    printf("\nENCONTRÉ UN TOKEN\n");
     manejaID(yytext);
 
     valorString = yytext;

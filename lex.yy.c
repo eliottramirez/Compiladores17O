@@ -897,7 +897,6 @@ case 18:
 YY_RULE_SETUP
 #line 34 "specflex.l"
 {
-    printf("\nENCONTRÉ UN TOKEN\n");
     manejaID(yytext);
 
     valorString = yytext;
@@ -906,7 +905,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 41 "specflex.l"
+#line 40 "specflex.l"
 {
     valorNum = atoi(yytext);
     return (2);
@@ -914,105 +913,105 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 45 "specflex.l"
+#line 44 "specflex.l"
 {return (18);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 46 "specflex.l"
+#line 45 "specflex.l"
 {return (19);}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 47 "specflex.l"
+#line 46 "specflex.l"
 {return (20);}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 48 "specflex.l"
+#line 47 "specflex.l"
 {return (21);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 49 "specflex.l"
+#line 48 "specflex.l"
 {return (22);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 50 "specflex.l"
+#line 49 "specflex.l"
 {return (23);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 51 "specflex.l"
+#line 50 "specflex.l"
 {return (24);}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 52 "specflex.l"
+#line 51 "specflex.l"
 {return (25);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 53 "specflex.l"
+#line 52 "specflex.l"
 {return (26);}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 54 "specflex.l"
+#line 53 "specflex.l"
 {return (27);}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 55 "specflex.l"
+#line 54 "specflex.l"
 {return (28);}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 56 "specflex.l"
+#line 55 "specflex.l"
 {return (29);}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 57 "specflex.l"
+#line 56 "specflex.l"
 {return (30);}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 58 "specflex.l"
+#line 57 "specflex.l"
 {return (31);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 59 "specflex.l"
+#line 58 "specflex.l"
 {return (32);}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 60 "specflex.l"
+#line 59 "specflex.l"
 {return (33);}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 61 "specflex.l"
+#line 60 "specflex.l"
 {return (34);}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 62 "specflex.l"
+#line 61 "specflex.l"
 {return (35);}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 64 "specflex.l"
+#line 63 "specflex.l"
 {errorHandler(-3);}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 65 "specflex.l"
+#line 64 "specflex.l"
 ECHO;
 	YY_BREAK
-#line 1015 "lex.yy.c"
+#line 1014 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2015,6 +2014,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 65 "specflex.l"
+#line 64 "specflex.l"
 
 

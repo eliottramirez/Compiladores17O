@@ -43,7 +43,7 @@ int yywrap(){
 
 int manejaID(char id[]){
 
-    printf("\nENTRÉ A manejaID() D: %d G: %d", declaracion, esGlobal);
+    //printf("\nENTRÉ A manejaID() D: %d G: %d", declaracion, esGlobal);
     if (declaracion == 1){
         if (esGlobal == 1){
             apID = search(tablaGlobal, id);
@@ -84,26 +84,30 @@ int manejaID(char id[]){
         }
     }
 
-    printf("\nSALÍ DE manejaID():");
+    /*printf("\nSALÍ DE manejaID():");
     printf("\nTABLA GLOBAL:\n");
     printTabla(tablaGlobal);
     printf("---------------------------");
     printf("\nTABLA LOCAL:\n");
     printTabla(tablaLocal);
-    printf("===========================\n\n");
+    printf("===========================\n\n");*/
 }
 
 int errorHandler(int codigoError){
+
+    printf("\nERROR:");
     
     if (codigoError == -1){
-        printf("\nVariable '%s' redeclarada. Línea %d\n", yytext, numLinea);
+        printf(" Variable '%s' redeclarada.", yytext);
     }
     else if (codigoError == -2){
-        printf("\nVariable '%s' no declarada. Línea %d\n", yytext, numLinea);
+        printf(" Variable '%s' no declarada.", yytext);
     }
     else if (codigoError == -3){
-        printf("\nError: Token '%s' no reconocido. Línea %d\n", yytext, numLinea);
+        printf(" Token '%s' no reconocido.", yytext);
     }
     
+    printf(" Línea: %d\n", numLinea);
+
     return 0;
 }

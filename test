@@ -2,5 +2,6 @@ entero a, b;
 entero a;
 
 funcionprincipal (){
-    c = 3;
+    a = 3;
+    a = 4;
 }

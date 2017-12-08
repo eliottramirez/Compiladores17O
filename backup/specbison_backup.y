@@ -68,7 +68,7 @@ FUN_DECLS: /* empty */
 | FUN_DECLS FUN_DECL
 ;
 
-FUN_PRINCIPAL: funcionprincipal paren_open paren_close {esGlobal = 0; declaracion = 0;} CUERPO
+FUN_PRINCIPAL: funcionprincipal paren_open paren_close {esGlobal = 0;} CUERPO
 ;
 
 FUN_DECL: ENCA DECLS {declaracion = 0;} CUERPO {purgeTabla(tablaLocal);}

@@ -1316,7 +1316,7 @@ yyreduce:
 
   case 17:
 #line 71 "specbison.y" /* yacc.c:1646  */
-    {esGlobal = 0;}
+    {esGlobal = 0; declaracion = 0;}
 #line 1321 "specbison.tab.c" /* yacc.c:1646  */
     break;
 
