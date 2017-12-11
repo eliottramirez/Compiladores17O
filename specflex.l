@@ -1,14 +1,12 @@
 %{
     #include "specbison.tab.h"
 
+    extern int valorNum;
+
+    extern int manejaID(char id[]);
     extern int errorHandler(int codigoError);
 
-    extern int valorNum;
-    extern char *valorString;
-    extern int manejaID(char id[]);
-
     int numLinea = 1;
-     
 %}
 l   [a-zA-Z]
 d   [0-9]
@@ -19,6 +17,7 @@ d   [0-9]
 entero      {return (3);}
 flotante    {return (4);}
 caracter    {return (5);}
+vacia       {return (21);}
 si          {return (6);}
 entonces    {return (7);}
 otro        {return (8);}
@@ -27,14 +26,12 @@ haz         {return (10);}
 regresa     {return (11);}
 directiva   {return (12);}
 paraleliza  {return (13);}
-incluye     {return (14);}
-define      {return (15);}
+"#incluye"     {return (14);}
+"#define"      {return (15);}
 funcion     {return (16);}
 funcionprincipal {return (17);}
 {l}({l}|{d})*   {
     manejaID(yytext);
-
-    valorString = yytext;
     return (1);
 }
 {d}+    {
@@ -44,7 +41,6 @@ funcionprincipal {return (17);}
 "."     {return (18);}
 [;]     {return (19);}
 [,]     {return (20);}
-"#"     {return (21);}
 [(]     {return (22);}
 [)]     {return (23);}
 [{]     {return (24);}

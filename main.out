@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<
+ERROR en línea 2: Bibloteca 'stdio.h' redeclarda.stdio.h>
+
+#define pi 3
+
+ERROR en línea 5: Variable 'pi' redeclarada.#define pi 15
+
+int a, b;
+float 
+ERROR en línea 8: Variable 'a' redeclarada.a;
+char c;
+
+char fun1(){
+b = c
+ERROR en línea 14: Expresión inválida. Operandos con distintos tipos.;
+return (1);
+ERROR en línea 16: Tipo de regreso inválido.
+}
+
+int main(){
+float h;
+
+ERROR en línea 22: Variable 'd' no declarada.d = a(a)
+ERROR en línea 22: Cantidad de argumentos incorrecto.
+ERROR en línea 22: Expresión inválida. Operandos con distintos tipos.;
+
+}
+
+
+ERROR en línea 25: Token '^' no reconocido.
+ERROR en línea 26: Error de sintaxis.

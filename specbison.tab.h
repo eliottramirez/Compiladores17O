@@ -65,7 +65,6 @@ extern int yydebug;
     punto = 18,
     punto_coma = 19,
     coma = 20,
-    gato = 21,
     paren_open = 22,
     paren_close = 23,
     llave_open = 24,

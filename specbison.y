@@ -1,9 +1,23 @@
 %{
-	extern int declaracion;
-	extern int esGlobal;
-    extern void yyerror(char* s);
+	
+	extern Nodo * apID;
+	extern Nodo * apFun;
+	extern int valorNum;
+	extern int flagDecl;
+	extern int flagGlobal;
+	extern int flagTipo;
+	extern int flagFun;
+    
+	extern void yyerror(char* s);
+	extern void purgeTabla(Nodo * tabla[]);
+	extern void printTabla(Nodo * tabla[]);
+
+	int tipoLadoIzq;
+	char nombreBib[20];
+
 %}
 %start PROGRAMA
+
 %token id 1
 %token numero 2
 %token entero 3
@@ -24,7 +38,6 @@
 %token punto 18
 %token punto_coma 19
 %token coma 20
-%token gato 21
 %token paren_open 22
 %token paren_close 23
 %token llave_open 24
@@ -40,108 +53,121 @@
 %token por 34
 %token entre 35
 %%
-PROGRAMA: PROTOTIPOS {declaracion = 1; esGlobal = 1;} CTES DECLS FUN_PRINCIPAL FUN_DECLS
+
+PROGRAMA: {flagGlobal = 1; flagDecl = 1; flagFun = 0;} PROTOTIPOS {flagTipo = 3; printf("\n");} CTES {printf("\n");} DECLS {printf("\n");} FUN_DECLS {flagDecl = 0;} FUN_PRINCIPAL 
 ;
 
-PROTOTIPOS: gato incluye menor id punto id mayor PROTOTIPOS
+PROTOTIPOS: incluye menor {flagDecl = -1; printf("#include<");} id {strcpy(nombreBib, yytext);} punto {strcat(nombreBib, ".");} id {strcat(nombreBib, yytext);} mayor {flagDecl = 1; flagGlobal = -1; manejaID(nombreBib); flagGlobal = 1; printf("%s>\n", apID->info->nombre);} PROTOTIPOS
 | /* empty */
 ;
 
 CTES: /* empty */
-| CTES gato define id entero
+| CTES define id {printf("#define %s ", yytext, valorNum);} numero {printf("%d\n", valorNum);}
 ;
 
-DECLS: /* empty */
-| DECLS DECL
+DECLS: {flagDecl = 1; flagFun = 0;} DECL punto_coma {printf(";\n");flagDecl = 0;} DECLS
+| /* empty */
 ;
 
-DECL: entero LISTA_ID punto_coma
-| flotante LISTA_ID punto_coma
-| caracter LISTA_ID punto_coma
+DECL: entero {flagTipo = 3; printf("int ");} LISTA_ID
+| flotante {flagTipo = 4; printf("float ");} LISTA_ID
+| caracter {flagTipo = 5; printf("char ");} LISTA_ID
 ;
 
-LISTA_ID: id
-| LISTA_ID coma id
+LISTA_ID: id {printf("%s", yytext);} L
 ;
 
-FUN_DECLS: /* empty */
-| FUN_DECLS FUN_DECL
+L: coma id {printf(", %s", yytext);} L
+| /* empty */
+; 
+
+FUN_DECLS: {flagDecl = 1; flagGlobal =1; flagFun = 1;} FUN_DECL FUN_DECLS
+| /* empty */
 ;
 
-FUN_PRINCIPAL: funcionprincipal paren_open paren_close {esGlobal = 0; declaracion = 0;} CUERPO
+FUN_PRINCIPAL: funcionprincipal paren_open paren_close {printf("int main()");} CUERPOFUN
 ;
 
-FUN_DECL: ENCA DECLS {declaracion = 0;} CUERPO {purgeTabla(tablaLocal);}
+FUN_DECL: ENCA CUERPOFUN
 ;
 
-ENCA: {declaracion = 1; esGlobal = 1;} funcion id {esGlobal = 0;} paren_open F
+ENCA: funcion TIPO id {apFun = apID; printf("%s", apFun->info->nombre);} paren_open {printf("(");} {flagGlobal = 0; flagDecl = 1;} F
 ;
 
-F: ARGS paren_close
-| paren_close
+TIPO: entero {flagTipo = 3; printf("int ");}
+| flotante {flagTipo = 4; printf("float ");}
+| caracter {flagTipo = 5; printf("char ");}
 ;
 
-ARGS: id
-| id coma ARGS
-;
-CUERPO: llave_open LISTA_INS llave_close
+F: {flagFun = 0;} ARGS paren_close {apFun->info->numArgs = $2; flagDecl = 0; printf(")");}
+| paren_close {apFun->info->numArgs = 0; flagDecl = 0; printf(")");}
 ;
 
-LISTA_INS: INS punto_coma
-| INS punto_coma LISTA_INS
+ARGS: TIPO id {$$ = 1; printf("%s", apID->info->nombre);}
+| TIPO id {printf("%s", apID->info->nombre);} coma {printf(", ");} ARGS {$$ = 1 + $6;}
 ;
 
-INS: id igual EXP
-| directiva paraleliza
-| si COND entonces INSTS otro INSTS
-| si COND entonces INSTS
-| mientras COND haz INSTS
-| regresa paren_open EXP paren_close
+CUERPOFUN: llave_open {flagGlobal = 0; printf("{\n");} DECLS LISTA_INS llave_close {purgeTabla(tablaLocal); flagGlobal = 1; printf("\n}\n\n");}
+;
+
+CUERPO: llave_open {printf("{\n");} LISTA_INS llave_close {printf("\n}\n");};
+;
+
+LISTA_INS: INS 
+| INS LISTA_INS
+;
+
+INS: id {tipoLadoIzq = apID->info->tipo; printf("%s", apID->info->nombre);} igual {printf(" = ");} EXP {if ($5 != tipoLadoIzq) errorHandler(-4);} punto_coma {printf(";\n");}
+| directiva paraleliza punto_coma {printf(";\n");}
+| si {printf("if (");} COND entonces {printf(") ");} INSTS
+| mientras {printf("while (");} COND haz INSTS
+| regresa paren_open {printf("return (");} EXP paren_close punto_coma {printf(");"); if ($4 != apFun->info->tipo) {errorHandler(-8);}}
 ;
 
 INSTS: INS
 | CUERPO
 ;
 
-COND: EXP RELOP EXP
+COND: EXP RELOP EXP {if ($1 != $3) errorHandler(-4); }
 ;
 
-EXP: TERMINO
-| EXP ADOP TERMINO
+EXP: TERMINO {$$ = $1;}
+| EXP ADOP TERMINO {if (($1 == 3) && ($3 == 3)) $$ = 3; else if (($1 == 4) && ($3 == 4)) $$ = 4; else errorHandler(-4);}
 ;
 
-TERMINO: FACTOR
-| TERMINO MULOP FACTOR
+TERMINO: FACTOR {$$ = $1;}
+| TERMINO MULOP FACTOR {if (($1 == 3) && ($3 == 3)) $$ = 3; else if (($1 == 4) && ($3 == 4)) $$ = 4; else errorHandler(-4);}
 ;
 
-FACTOR: id
-| id paren_open paren_close
-| id paren_open LISTA_EXP paren_close
-| numero
-| paren_open EXP paren_close
+FACTOR: id {$$ = apID->info->tipo; printf("%s", apID->info->nombre);}
+| id paren_open paren_close {apFun = apID; $$ = apFun->info->tipo; printf("%s ()", apFun->info->nombre); if (apFun->info->numArgs != 0) errorHandler(-5);}
+| id paren_open {apFun = apID; printf("%s(", apFun->info->nombre);} LISTA_EXP paren_close {printf(")"); $$ = apFun->info->tipo; if (apFun->info->numArgs != $4) errorHandler(-5);}
+| numero { $$ = 3; printf("%d", valorNum);}
+| paren_open {printf("(");} EXP paren_close {printf(")"); $$ = $3;}
 ;
 
-LISTA_EXP: EXP
-| EXP coma LISTA_EXP
+LISTA_EXP: EXP {$$ = 1;}
+| EXP coma {printf(", ");} LISTA_EXP {$$ = 1 + $4;}
 ;
 
-RELOP: mayor_igual
-| menor_igual
-| mayor
-| menor
-| igual
-| no_igual
+RELOP: mayor_igual {printf(" >= ");}
+| menor_igual {printf(" <= ");}
+| mayor {printf(" > ");}
+| menor {printf(" < ");}
+| igual {printf(" == ");}
+| no_igual {printf(" != ");}
 ;
 
-ADOP: mas
-| menos
+ADOP: mas {printf(" + ");}
+| menos {printf(" - ");}
 ;
 
-MULOP: por
-| entre
+MULOP: por {printf(" * ");}
+| entre {printf(" / ");}
 ;
 %%
 
 void yyerror(char *cadena){
-	printf("Parse error: %s\n", cadena);
+	errorHandler(-6);
+	
 }

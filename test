@@ -1,7 +1,12 @@
 entero a, b;
-entero a;
+caracter c;
+flotante d;
 
 funcionprincipal (){
     a = 3;
     a = 4;
+    b = 5;
+    a = b;
+    c = d;
+    d = 5;
 }

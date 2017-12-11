@@ -1,0 +1,39 @@
+#incluye<stdio.h>
+#incluye<string.h>
+
+#define pi 3
+#define iva 15
+
+entero a, b;
+flotante c;
+caracter d;
+
+funcion entero fun (entero e, entero f){
+    entero g;
+
+    a = 1;
+
+    si 5 > 3 entonces a = 1;
+
+    si a > 1 entonces {
+        a = 0;
+        b = 2;
+    }
+
+    regresa (a);
+}
+
+funcion entero fun2 (entero i){
+    regresa (0);
+}
+
+funcionprincipal (){
+    flotante h;
+
+    a = fun(3, 4);
+
+    mientras a < 5 haz {
+        a = a + 1;
+    }
+    
+}

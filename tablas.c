@@ -6,10 +6,12 @@
 
 typedef struct structInfo {
     char nombre[40];
-    char tipo[15];
+    int fun;
+    int tipo;
     int intvalor;
     float floatvalor;
     char charvalor;
+    int numArgs;
 } Info;
 
 typedef struct structNodo {
@@ -20,7 +22,7 @@ typedef struct structNodo {
 void initMenu();
 void initTablas();
 
-Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor);
+Nodo * initNodo(int fun, int tipo, char nombre[], int intvalor, float floatvalor, char charvalor);
 void insertNodo(Nodo ** lista, Nodo * newNodo);
 int deleteNodo(Nodo ** lista, char nombre[]);
 Nodo * searchNodo(Nodo * lista, char nombre[]);
@@ -40,57 +42,10 @@ Nodo * tablaGlobal[SIZE];
 Nodo * tablaLocal[SIZE];
 
 Nodo * apID;
-
-/*int main(){
-
-    initTablas();
-
-    insert(tablaLocal, initNodo("entero", "a", 1, 0.0, '\0'));
-    insert(tablaLocal, initNodo("flotante", "b", 0, 2.0, '\0'));
-    insert(tablaLocal, initNodo("caracter", "c", 0, 0.0, '3'));
-    insert(tablaLocal, initNodo("entero", "g", 7, 0.0, '\0'));
-    
-    insert(tablaGlobal, initNodo("entero", "d", 4, 0, '\0'));
-    insert(tablaGlobal, initNodo("flotante", "e", 0, 5.0, '\0'));
-    insert(tablaGlobal, initNodo("caracter", "f", 0, 0.0, '6'));
-    insert(tablaGlobal, initNodo("entero", "h", 8, 0.0, '\0'));
-
-    apID = search(tablaLocal, "g");
-    if (apID != NULL){
-        printf("\nEncontrado.\n");
-    }
-    else {
-        printf("\nNo encontrado.\n");
-    }
-    apID = search(tablaGlobal, "h");
-    if (apID != NULL){
-        printf("\nEncontrado.\n");
-    }
-    else {
-        printf("\nNo encontrado.\n");
-    }
-
-    delete(tablaLocal, "g");
-    delete(tablaGlobal, "h");
-
-    printTabla(tablaLocal);
-    printTabla(tablaGlobal);
-
-    purgeTabla(tablaLocal);
-    purgeTabla(tablaGlobal);
-
-    apID = insert(tablaLocal, initNodo("entero", "a", 1, 0.0, '\0'));
-    printNodo(apID);
-    insert(tablaLocal, initNodo("flotante", "b", 0, 2.0, '\0'));
-
-    insert(tablaGlobal, initNodo("entero", "d", 4, 0, '\0'));
-    insert(tablaGlobal, initNodo("flotante", "e", 0, 5.0, '\0'));
-
-    printTabla(tablaLocal);
-    printTabla(tablaGlobal);
-}*/
+Nodo * apFun;
 
 void initTablas(){
+    
     for (int i = 0; i < SIZE; i++){
         tablaGlobal[i] = NULL;
     }
@@ -154,11 +109,12 @@ void printTabla(Nodo * tabla[]){
     }
 }
 
-Nodo * initNodo(char tipo[], char nombre[], int intvalor, float floatvalor, char charvalor){
+Nodo * initNodo(int fun, int tipo, char nombre[], int intvalor, float floatvalor, char charvalor){
     Nodo * newNodo = malloc(sizeof(Nodo));
     newNodo->info = malloc(sizeof(Info));
     
-    strcpy(newNodo->info->tipo, tipo);
+    newNodo->info->fun = fun;
+    newNodo->info->tipo = tipo;
     strcpy(newNodo->info->nombre, nombre);
     newNodo->info->intvalor = intvalor;
     newNodo->info->floatvalor = floatvalor;
@@ -193,7 +149,7 @@ int deleteNodo(Nodo ** lista, char nombre[]){
         return 1;
     }
     
-    //Apartir de aquí hace la búsqueda apartir del next.
+    //A partir de aquí hace la búsqueda apartir del next.
     while (next != NULL){
 
         if (strcmp(next->info->nombre, nombre) == 0){
@@ -243,20 +199,25 @@ void printLista(Nodo *lista){
 
 void printNodo(Nodo *nodo){
 
-    if (strcmp(nodo->info->tipo, "entero") == 0){
-        printf("Tipo: %s\n", nodo->info->tipo);
+    
+    if (nodo->info->fun == 1){
+        printf("Función\n");
+    }
+    else if (nodo->info->tipo == 3){
+        printf("Tipo: entero\n");
         printf("Nombre: %s\n", nodo->info->nombre);
-        printf("Valor: %d\n", nodo->info->intvalor);
     }
-    else if (strcmp(nodo->info->tipo, "flotante") == 0){
-        printf("Tipo: %s\n", nodo->info->tipo);
-        printf("Nombre: %s \n", nodo->info->nombre);
-        printf("Valor: %f\n", nodo->info->floatvalor);
+    else if (nodo->info->tipo == 4){
+        printf("Tipo: flotante\n");
+        printf("Nombre: %s\n", nodo->info->nombre);
     }
-    else if (strcmp(nodo->info->tipo, "caracter") == 0){
-        printf("Tipo: %s\n", nodo->info->tipo);
-        printf("Nombre: %s \n", nodo->info->nombre);
-        printf("Valor: %c\n", nodo->info->charvalor);
+    else if (nodo->info->tipo == 5){
+        printf("Tipo: caracter\n");
+        printf("Nombre: %s\n", nodo->info->nombre);
+    }
+    else if (nodo->info->tipo == 36){
+        printf("Tipo: biblioteca\n");
+        printf("Nombre: %s\n", nodo->info->nombre);
     }
 
     printf("-->\n");

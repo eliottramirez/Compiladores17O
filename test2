@@ -1,2 +1,29 @@
-a
-3
+#incluye<stdio.h>
+#incluye<stdio.h>
+
+#define pi 3
+#define pi 15
+
+entero a, b;
+flotante a;
+caracter c;
+
+
+funcion caracter fun1(){
+
+    b = c;
+
+    regresa (1);
+}
+
+funcionprincipal (){
+    flotante h;
+
+    d = fun1(a);
+}
+
+^
+funcion entero fun 3 () {
+    ¨
+}
+
