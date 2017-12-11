@@ -1,3 +1,4 @@
 flex specflex.l
-bison specbison.y -d -v
+bison specbison.y -d
 gcc main.c -o main
+
