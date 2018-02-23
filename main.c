@@ -27,19 +27,32 @@ int flagDecl = 0;
 int flagGlobal = 0;
 int flagTipo = 3;
 int flagFun = 0;
+int flagError = 0;
 
-char salida[100];
+FILE * output;
 
 int main (int argc, char *argv[]){
+    
+    int l = strlen(argv[1]) + strlen(".c");
+    char outputname[l];
+    strcpy(outputname, argv[1]);
+    strcat(outputname, ".c");
 
-    initTablas();
-
+    initTablas();   
+    
     yyin = fopen(argv[1], "r");
+    output = fopen(outputname, "w");
 
     do {
         yyparse();
     } while(idToken != 0);
+    
+    fclose(output);
 
+    if(flagError == 1){
+        remove(outputname);
+    }
+    
     return 0;
 }
 
@@ -104,6 +117,8 @@ int manejaID(char id[]){
 }
 
 int errorHandler(int codigoError){
+
+    flagError = 1;
 
     printf("\nERROR en línea %d:", numLinea);
 

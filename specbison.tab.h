@@ -45,6 +45,8 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
+    IFX = 258,
+    otro = 8,
     id = 1,
     numero = 2,
     entero = 3,
@@ -52,7 +54,6 @@ extern int yydebug;
     caracter = 5,
     si = 6,
     entonces = 7,
-    otro = 8,
     mientras = 9,
     haz = 10,
     regresa = 11,
